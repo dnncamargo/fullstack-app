@@ -32,9 +32,26 @@ function App() {
         }));
     }
 
+    const createClient = async() => {
+        console.log(client);
+        const newData = await fetch('/save', {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                ...client
+            }) 
+        })
+        .then(res => res.json());
+        setReturnedData(newData[0]);       
+        //console.log(newData);
+    }
+
     const fetchData = async() => {
         console.log(client);
-        const newData = await fetch('/api', {
+        const newData = await fetch('/fetch', {
             method: 'POST', 
             headers: {
                 'Content-Type': 'application/json',
@@ -46,9 +63,9 @@ function App() {
         })
         .then(res => res.json());
         setReturnedData(newData[0]);       
-        console.log(newData);
+        //console.log(newData);
     }
-    console.log(returnedData);
+    //console.log(returnedData);
 
     return (
         <div className='App'>
@@ -78,7 +95,7 @@ function App() {
                 placeholder="UF" 
                 onChange={setInput}></input>
             <button onClick={ 
-                () => fetchData() }>
+                () => createClient() }>
                 Salvar
             </button>
             <button onClick={ 

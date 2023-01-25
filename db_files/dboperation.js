@@ -4,7 +4,7 @@ const config = require('./dbconfig'),
 const getClients = async(id) => {
     try {
         let pool = await sql.connect(config);
-        let clients = pool.request().query(
+        let clients = await pool.request().query(
             `SELECT * FROM Clients WHERE clientID = '${id}'`
         )
         return clients;
@@ -16,7 +16,7 @@ const getClients = async(id) => {
 const insertClient = async(client) => {
     try {
         let pool = await sql.connect(config);
-        let clients = pool.request().query(
+        let clients = await pool.request().query(
 
             `INSERT INTO Clients VALUES (
                 ${client.clientID}, 
