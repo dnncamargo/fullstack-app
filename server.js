@@ -12,17 +12,9 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
 
-<<<<<<< Updated upstream
-app.post('/create', async (req, res) => {
-    console.log(req.body);
-    dbOperation.insertClient(req.body);
-    const resultquery = await dbOperation.getClients(req.body.name);
-
-=======
 app.post('/api', async (req, res) => {
     //dbOperation.insertClient(req.body);
     const resultquery = await dbOperation.getClients(req.body.name);
->>>>>>> Stashed changes
     res.send(resultquery.recordset);
 });
 
