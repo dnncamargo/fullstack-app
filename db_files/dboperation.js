@@ -1,13 +1,12 @@
 const config = require('./dbconfig'),
          sql = require('mssql');
 
-const getClients = async() => {
+const getClients = async(id) => {
     try {
         let pool = await sql.connect(config);
-        let clients = pool.request().query(
-            "SELECT * FROM Clients"
+        let clients = await pool.request().query(
+            `SELECT * FROM Clients WHERE clientID = '${id}'`
         )
-        console.log(clients);
         return clients;
     } catch (error) {
         console.log(error);
@@ -17,7 +16,7 @@ const getClients = async() => {
 const insertClient = async(client) => {
     try {
         let pool = await sql.connect(config);
-        let clients = pool.request().query(
+        let clients = await pool.request().query(
 
             `INSERT INTO Clients VALUES (
                 ${client.clientID}, 
