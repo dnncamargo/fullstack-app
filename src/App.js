@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
 
-    const [returnedData, setReturnedData] = useState(['']);
+    const [returnedData, setReturnedData] = useState('');
     const [client, setClient] = useState({
         clientID: 0,
         firstname: '',
@@ -45,10 +45,11 @@ function App() {
             }) 
         })
         .then(res => res.json());
+        setReturnedData(newData[0]);       
         console.log(newData);
-        setReturnedData(newData.result);
     }
     console.log(returnedData);
+
     return (
         <div className='App'>
             <input 
@@ -84,14 +85,13 @@ function App() {
                 () => fetchData() }>
                 Buscar
             </button>
-           
+            
             <p>Cliend ID : {returnedData.clientID}</p>
             <p>First Name : {returnedData.firstname}</p>
             <p>Last Name : {returnedData.lastname}</p>
             <p>CPF : {returnedData.cpfid}</p>
             <p>Phone Number : {returnedData.phone}</p>
             <p>State : {returnedData.state}</p>
-            {returnedData}
         </div>
     );
 }

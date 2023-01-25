@@ -7,7 +7,6 @@ const getClients = async(id) => {
         let clients = pool.request().query(
             `SELECT * FROM Clients WHERE clientID = '${id}'`
         )
-        console.log(clients);
         return clients;
     } catch (error) {
         console.log(error);
